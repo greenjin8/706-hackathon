@@ -11,9 +11,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --paper: #F2EFE9;
-      --red: #B91C1C;
-      --ink: #111111;
+      --paper: #EAE6DF;
+      --red: #991B1B;
+      --ink: #0D0D0D;
       --axis: 45%;
     }
 
@@ -22,13 +22,20 @@
     body {
       background-color: var(--paper);
       background-image:
-        radial-gradient(circle, rgba(17, 17, 17, 0.045) 0.6px, transparent 0.6px);
+        radial-gradient(circle, rgba(13, 13, 13, 0.055) 0.6px, transparent 0.6px);
       background-size: 5px 5px;
       color: var(--ink);
       font-family: Georgia, "Songti SC", "SimSun", "Noto Serif SC", serif;
       font-size: 16px;
+      font-weight: 500;
       line-height: 1.75;
       overflow-x: hidden;
+    }
+
+    p, li, em, .masthead-sub, .section-label, .notice p,
+    .schedule-period ul li, .schedule-note, .footer-bar span {
+      color: var(--ink);
+      font-weight: 500;
     }
 
     /* ── Vertical red axis at 45% ── */
@@ -42,7 +49,7 @@
       background: var(--red);
       z-index: 100;
       pointer-events: none;
-      box-shadow: 2px 0 0 rgba(185, 28, 28, 0.15);
+      box-shadow: 2px 0 0 rgba(153, 27, 27, 0.22);
     }
 
     .page {
@@ -86,6 +93,7 @@
       line-height: 0.95;
       letter-spacing: -0.02em;
       text-transform: uppercase;
+      color: var(--red);
       max-width: 85%;
     }
 
@@ -123,6 +131,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--red);
       margin-top: -0.3em;
       padding-left: 0.15em;
       border-left: 8px solid var(--ink);
@@ -131,11 +140,13 @@
     /* ── Section blocks (asymmetric) ── */
     .section {
       position: relative;
-      margin-bottom: 3.5rem;
+      margin-bottom: 4.5rem;
       display: grid;
       grid-template-columns: 38% 1fr;
       gap: 1.5rem 2rem;
       align-items: start;
+      overflow: visible;
+      min-height: 120px;
     }
 
     .section.reverse {
@@ -148,6 +159,7 @@
     .section-num-col {
       position: sticky;
       top: 2rem;
+      z-index: 4;
     }
 
     .section-num {
@@ -159,7 +171,6 @@
       color: var(--red);
       transform: scaleX(0.85);
       transform-origin: left top;
-      opacity: 0.92;
     }
 
     .section.reverse .section-num {
@@ -169,11 +180,11 @@
     .section-label {
       font-family: "Oswald", Impact, sans-serif;
       font-size: 0.75rem;
+      font-weight: 700;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       margin-top: 0.5rem;
       color: var(--ink);
-      opacity: 0.6;
     }
 
     .section-body h2 {
@@ -182,6 +193,7 @@
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      color: var(--red);
       margin-bottom: 1.2rem;
       padding-bottom: 0.5rem;
       border-bottom: 3px solid var(--red);
@@ -194,7 +206,7 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       margin: 1.8rem 0 0.8rem;
-      color: var(--red);
+      color: var(--ink);
     }
 
     .section-body p {
@@ -238,6 +250,91 @@
       color: var(--ink);
     }
 
+    .section-body {
+      position: relative;
+      z-index: 3;
+      padding: 0.85rem 1.15rem 0.85rem 0.95rem;
+      background: linear-gradient(
+        105deg,
+        var(--paper) 0%,
+        var(--paper) 58%,
+        rgba(234, 230, 223, 0.97) 72%,
+        rgba(234, 230, 223, 0.92) 100%
+      );
+      box-shadow: -2px 0 0 rgba(234, 230, 223, 0.6);
+    }
+
+    .section.reverse .section-body {
+      background: linear-gradient(
+        255deg,
+        var(--paper) 0%,
+        var(--paper) 58%,
+        rgba(234, 230, 223, 0.97) 72%,
+        rgba(234, 230, 223, 0.92) 100%
+      );
+      padding: 0.85rem 0.95rem 0.85rem 1.15rem;
+      box-shadow: 2px 0 0 rgba(234, 230, 223, 0.6);
+    }
+
+    /* ── Collage photo (newspaper cut-out) ── */
+    .collage-photo {
+      position: absolute;
+      z-index: 2;
+      width: clamp(168px, 28vw, 320px);
+      margin: 0;
+      padding: 4px;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 6px 7px 0 rgba(13, 13, 13, 0.14);
+      transform: rotate(-1deg);
+      pointer-events: none;
+      clip-path: polygon(1% 0%, 99% 2%, 100% 98%, 0% 99%);
+    }
+
+    .collage-photo--right {
+      top: 0.25rem;
+      right: clamp(-0.5rem, -1.5vw, 1rem);
+    }
+
+    .collage-photo--left {
+      top: 0.25rem;
+      left: clamp(-0.5rem, -1.5vw, 1rem);
+      transform: rotate(1.15deg);
+    }
+
+    .collage-photo--tilt-alt {
+      transform: rotate(-1.65deg);
+    }
+
+    .collage-photo--left.collage-photo--tilt-alt {
+      transform: rotate(1.65deg);
+    }
+
+    .collage-photo--below {
+      position: relative;
+      top: auto;
+      right: auto;
+      left: auto;
+      float: right;
+      clear: both;
+      width: clamp(180px, 36%, 340px);
+      margin: 0.5rem 0 1.2rem 1.8rem;
+      transform: rotate(-1deg);
+    }
+
+    .section.has-below-photo {
+      padding-bottom: 0.5rem;
+    }
+
+    .collage-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(140%);
+    }
+
     /* ── Constructivist diagonal accent ── */
     .diag-stripe {
       position: absolute;
@@ -247,57 +344,6 @@
       transform: rotate(-12deg);
       opacity: 0.7;
       pointer-events: none;
-    }
-
-    /* ── Fieldwork photo ── */
-    .photo-block {
-      position: relative;
-      margin: 4rem 0;
-      padding: 1.5rem;
-      border: 5px solid var(--ink);
-      background: var(--ink);
-      transform: translateX(-2%);
-      max-width: 72%;
-    }
-
-    .photo-block::before {
-      content: "FIELDWORK / 田野";
-      position: absolute;
-      top: -1.1rem;
-      left: 1.5rem;
-      background: var(--paper);
-      padding: 0 0.6rem;
-      font-family: "Oswald", Impact, sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      font-weight: 700;
-    }
-
-    .photo-block::after {
-      content: "";
-      position: absolute;
-      bottom: -12px;
-      right: -12px;
-      width: 60%;
-      height: 12px;
-      background: var(--red);
-    }
-
-    .photo-block img {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: grayscale(100%) contrast(1.45) brightness(0.92);
-      object-fit: cover;
-      max-height: 480px;
-    }
-
-    .photo-caption {
-      margin-top: 0.8rem;
-      font-size: 0.85rem;
-      font-style: italic;
-      color: rgba(242, 239, 233, 0.75);
-      text-align: justify;
     }
 
     /* ── Street notice: 组委会提示 ── */
@@ -370,8 +416,10 @@
     .day-subtitle {
       font-family: "Oswald", Impact, sans-serif;
       font-size: 1rem;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: var(--ink);
       margin-bottom: 1.5rem;
       padding-left: 0.5rem;
       border-left: 5px solid var(--ink);
@@ -404,7 +452,8 @@
     .schedule-note {
       font-size: 0.85rem;
       font-style: italic;
-      opacity: 0.75;
+      font-weight: 500;
+      color: var(--ink);
       margin-top: 0.5rem;
       text-align: justify;
     }
@@ -430,6 +479,12 @@
     .theme-box p,
     .theme-box li {
       text-align: justify;
+      font-weight: 500;
+      color: var(--paper);
+    }
+
+    .theme-box strong {
+      font-weight: 700;
       color: var(--paper);
     }
 
@@ -461,6 +516,99 @@
       background: var(--red);
     }
 
+    /* ── Fixed audio player (constructivist) ── */
+    .audio-player {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 200;
+      display: flex;
+      align-items: stretch;
+      background: var(--ink);
+      border: 3px solid var(--ink);
+      box-shadow:
+        4px 4px 0 var(--red),
+        inset 0 0 0 1px var(--red);
+      transform: rotate(0.5deg);
+      font-family: "Oswald", Impact, sans-serif;
+    }
+
+    .audio-player__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      min-height: 2.75rem;
+      padding: 0;
+      border: none;
+      border-right: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--red);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .audio-player__btn:hover,
+    .audio-player__btn:focus-visible {
+      background: var(--red);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .audio-player__btn svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+    }
+
+    .audio-player__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.45rem 0.85rem 0.4rem;
+      min-width: 9rem;
+      max-width: 11rem;
+      border-left: 2px solid var(--red);
+    }
+
+    .audio-player__label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      line-height: 1.2;
+    }
+
+    .audio-player__track {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 0.15rem;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .audio-player__status {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-top: 0.2rem;
+    }
+
+    .audio-player audio {
+      display: none;
+    }
+
+    .audio-player.is-playing .audio-player__status::after {
+      content: " · LOOP";
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       :root { --axis: 8%; }
@@ -475,9 +623,49 @@
       .section.reverse .section-body { order: 0; }
       .section.reverse .section-num { transform-origin: left top; }
 
-      .photo-block {
-        max-width: 100%;
+      .section-body,
+      .section.reverse .section-body {
+        background: var(--paper);
+        padding: 0;
+      }
+
+      .collage-photo {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        float: none;
+        width: min(90%, 340px);
+        margin: 2rem auto 0;
+        transform: rotate(-1deg);
+        pointer-events: auto;
+      }
+
+      .collage-photo--left,
+      .collage-photo--tilt-alt,
+      .collage-photo--left.collage-photo--tilt-alt {
+        transform: rotate(1deg);
+      }
+
+      .collage-photo--below {
+        float: none;
+        margin: 2rem auto 0;
+      }
+
+      .audio-player {
+        top: 0.75rem;
+        right: 0.75rem;
         transform: none;
+      }
+
+      .audio-player__info {
+        min-width: 7rem;
+        max-width: 8.5rem;
+        padding: 0.4rem 0.65rem;
+      }
+
+      .audio-player__track {
+        font-size: 0.65rem;
       }
 
       .masthead h1 { max-width: 100%; }
@@ -487,10 +675,27 @@
     @media print {
       body::before { display: none; }
       .section-num-col { position: static; }
+      .collage-photo { position: relative; float: none; margin: 1rem auto; }
     }
   </style>
 </head>
 <body>
+  <!-- ═══ Fixed background music ═══ -->
+  <div class="audio-player" id="audioPlayer" aria-label="背景音乐播放器">
+    <button class="audio-player__btn" id="audioToggle" type="button" aria-label="播放音乐" aria-pressed="false">
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>
+    </button>
+    <div class="audio-player__info">
+      <span class="audio-player__label">Sound / 声景</span>
+      <span class="audio-player__track">Our Shared Canvas</span>
+      <span class="audio-player__status" id="audioStatus">PAUSE</span>
+    </div>
+    <audio id="bgAudio" loop preload="metadata">
+      <source src="Our_Shared_Canvas.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
   <div class="page">
 
     <!-- ═══ MASTHEAD ═══ -->
@@ -518,6 +723,7 @@
         <p>706 Multi-node Hackathon 是一套以青年社区为基础、以公共议题为导向、以 AI 为技术工具的多节点式跨界共创品牌。</p>
         <p>我们不将 Hackathon 局限于纯粹的软件编程或商业竞速。本项目将十多年来在国内外多个城市共创数十个空间据点的经验进行系统化升级。我们致力于把黑客松重构为一种全球青年可参与的公共生活实验网络。通过技术祛魅，我们将人文思考与科技工具重新放回真实的日常场景之中。</p>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page1-1.jpg" alt="第一部分 · 章节 01"></figure>
     </article>
 
     <!-- 二、品牌宣言 -->
@@ -531,13 +737,8 @@
         <p>AI 技术工具降低了创作的物理门槛，却没有自动拉近人与人之间的心理距离。</p>
         <p>我们相信，未来真正重要的创造力并非来自虚拟的代码堆砌。它必然来自对真实生活的细致观察、对真实社区的深切连接、以及打破学科壁垒的深度协作。本项目鼓励创作者将目光重新投向身边的"附近"。我们希望借助 AI 辅助创作能力，共同回应具体的公共议题，重构人与人的附近连接。</p>
       </div>
+      <figure class="collage-photo collage-photo--left collage-photo--tilt-alt"><img loading="lazy" decoding="async" src="page1-2.jpg" alt="第一部分 · 章节 02"></figure>
     </article>
-
-    <!-- Fieldwork photo -->
-    <figure class="photo-block">
-      <img src="fieldwork.jpg" alt="田野调研纪实">
-      <figcaption class="photo-caption">真实调研（Real Fieldwork）—— 拒绝闭门造车的空中楼阁，关注身边的附近生活、城市公共性与在地价值。</figcaption>
-    </figure>
 
     <!-- 三、品牌愿景 -->
     <article class="section">
@@ -550,6 +751,7 @@
         <p>我们希望打造中国最具代表性的 Multi-node Hackathon 品牌，构建一个长效的全球青年共创网络。</p>
         <p>本项目将持续连接全球 38 个城市节点的青年社区、高校院系、前沿企业与公共文化机构。我们不追求短期的话题爆款，而是专注于长期主义的价值沉淀。通过持续优化多节点共创网络，我们将不断孵化出兼具人文关怀、艺术表达与科技可行性的社会价值成果。</p>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page1-3.jpg" alt="第一部分 · 章节 03"></figure>
     </article>
 
     <!-- 四、品牌方法论 -->
@@ -569,6 +771,7 @@
           <li><strong>城市节点（City Nodes）</strong>：基于 706 过去积累的 3,800+ 场社区活动经验，推动跨城市的联动共创。各个城市节点互为镜像、共享议题，最终形成全球尺度的青年实验网络。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--left"><img loading="lazy" decoding="async" src="page1-4.png" alt="第一部分 · 章节 04"></figure>
     </article>
 
     <!-- 五、品牌差异化 -->
@@ -587,6 +790,7 @@
           <li><strong>共同生活（Co-living）</strong>：强调沉浸式共同生活。创作者在共同构筑的日常社区里生活、交流与摩擦，从社群连接中直接推演共创灵感。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--right collage-photo--tilt-alt"><img loading="lazy" decoding="async" src="page1-5.jpg" alt="第一部分 · 章节 05"></figure>
     </article>
 
     <!-- 六、年度主题 -->
@@ -612,9 +816,8 @@
           </ul>
         </div>
       </div>
+      <figure class="collage-photo collage-photo--left"><img loading="lazy" decoding="async" src="page1-6.jpg" alt="第一部分 · 章节 06"></figure>
     </article>
-
-    <!-- ═══ PART 02 ═══ -->
     <div class="part-banner">
       <div class="part-num">02</div>
       <div class="part-title">第二部分：2026 Summer 落地执行方案</div>
@@ -634,16 +837,18 @@
           <li><strong>选题方向</strong>：通过前期投票确认 3 个最终主题，备选八大微观方向包括：附近·身体（空间障碍/疗愈）、附近·感知（感官细节）、附近·擦肩（跨越陌生人间距）、附近·劳动（技术贴近骑手快递员）、附近·故事（空间口述史/记忆）、附近·物件（旧物流动关系）、附近·自然（生态感知）、附近·时间（记录街区四季与节律）。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page2-1.jpg" alt="第二部分 · 章节 01"></figure>
     </article>
 
     <!-- 二、活动结构 -->
-    <article class="section reverse">
+    <article class="section reverse has-below-photo">
       <div class="section-num-col">
         <div class="section-num">02</div>
         <div class="section-label">Event Architecture</div>
       </div>
       <div class="section-body">
         <h2>二、 活动结构（Event Architecture）</h2>
+        <figure class="collage-photo collage-photo--below collage-photo--tilt-alt"><img loading="lazy" decoding="async" src="page2-2.jpg" alt="第二部分 · 章节 02"></figure>
 
         <div class="day-block">
           <div class="day-label">DAY 1</div>
@@ -708,8 +913,6 @@
         </div>
       </div>
     </article>
-
-    <!-- 三、组织架构 -->
     <article class="section">
       <div class="section-num-col">
         <div class="section-num">03</div>
@@ -733,9 +936,8 @@
           <p>关于各大模块及志愿者的具体点位排班、现场物料分发（如现场打印机的油墨更换、NFC芯片的贴片协助等）动作指引，请参见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
         </div>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page2-3.jpg" alt="第二部分 · 章节 03"></figure>
     </article>
-
-    <!-- 四、时间线管理 -->
     <article class="section reverse">
       <div class="section-num-col">
         <div class="section-num">04</div>
@@ -750,9 +952,8 @@
           <li><strong>收尾期</strong>：项目全面复盘总结；将本届优秀产出归档并沉淀至 706 长期空间网络进行后续的孵化与落地。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--left"><img loading="lazy" decoding="async" src="page2-4.jpg" alt="第二部分 · 章节 04"></figure>
     </article>
-
-    <!-- 五、导师与评委体系 -->
     <article class="section">
       <div class="section-num-col">
         <div class="section-num">05</div>
@@ -765,9 +966,8 @@
           <li><strong>展览评审制（Expo Evaluation）</strong>：评审打破传统讲台路演局限。评委团在 Day 2 15:30 评审时刻以低姿态进入展区，在各个团队亲手布展的摊位间自由走动、体验作品原型，并进行 3-5 分钟的现场面对面问答提问。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--right collage-photo--tilt-alt"><img loading="lazy" decoding="async" src="page2-5.jpg" alt="第二部分 · 章节 05"></figure>
     </article>
-
-    <!-- 六、创作者与选手体系 -->
     <article class="section reverse">
       <div class="section-num-col">
         <div class="section-num">06</div>
@@ -781,12 +981,11 @@
         </ul>
         <div class="notice">
           <div class="notice-header">组委会提示</div>
-          <p>关于 Day 1 现场"跳蚤市场墙"处理未成队选手机制、以及 Day 2 "空格子（诚实记录失败碎片）"的现场布展物理规范，在策划案中仅作为人文玩法概念保留，具体实操与表单打印规范详见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
+          <p>关于 Day 1 现场"跳蚤市场墙"处理未成队选手机制、以及 Day 2 "空格子"的现场布展物理规范，在策划案中仅作为人文玩法概念保留，具体实操与表单打印规范详见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
         </div>
       </div>
+      <figure class="collage-photo collage-photo--left"><img loading="lazy" decoding="async" src="page2-6.jpg" alt="第二部分 · 章节 06"></figure>
     </article>
-
-    <!-- 七、赞助与共创生态 -->
     <article class="section">
       <div class="section-num-col">
         <div class="section-num">07</div>
@@ -799,9 +998,8 @@
           <li><strong>权益矩阵</strong>：为合作伙伴提供线上线下全渠道品牌露出、特邀智识分享席位、创意市集专属游园展位、以及优秀青年项目的优先长线对接等核心权益。特别设立由赞助商深度冠名的专属创新奖项（如"观猹 Token 特别奖"、"奇绩算力奖"）。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page2-7.jpg" alt="第二部分 · 章节 07"></figure>
     </article>
-
-    <!-- 八、风险控制 -->
     <article class="section reverse">
       <div class="section-num-col">
         <div class="section-num">08</div>
@@ -819,9 +1017,8 @@
           <li><em>合规与数据规范</em>：严格审查参赛作品，确保凡涉及真实社区用户数据采集的调研作品均遵守数据隐私合规规范。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--left collage-photo--tilt-alt"><img loading="lazy" decoding="async" src="page2-8.jpg" alt="第二部分 · 章节 08"></figure>
     </article>
-
-    <!-- 九、品牌资产沉淀 -->
     <article class="section">
       <div class="section-num-col">
         <div class="section-num">09</div>
@@ -839,9 +1036,8 @@
         </ul>
         <p><strong>长线价值孵化</strong>：结合特色玩法中"空格子"所沉淀的诚实叙事记录以及"信物交换"互评结果，筛选出兼具真实人文关怀、艺术张力与科技落地可行性的优秀项目，直接注入 706 长期网络进行持续的空间落地扶持与孵化。</p>
       </div>
+      <figure class="collage-photo collage-photo--right"><img loading="lazy" decoding="async" src="page2-9.jpg" alt="第二部分 · 章节 09"></figure>
     </article>
-
-    <!-- 十、长期发展路线图 -->
     <article class="section reverse">
       <div class="section-num-col">
         <div class="section-num">10</div>
@@ -854,14 +1050,55 @@
           <li><strong>去中心化网络蔓延</strong>：后续将该套人文 Hackathon 模式快速复制并蔓延至其他核心城市节点（共享社会议题、互为田野镜像），逐步形成去中心化的 <strong>706 Multi-node Hackathon Network</strong>，让全球青年可以随时随地展开游牧共创，共同重构具体的生活世界。</li>
         </ul>
       </div>
+      <figure class="collage-photo collage-photo--left"><img loading="lazy" decoding="async" src="page2-10.jpg" alt="第二部分 · 章节 10"></figure>
     </article>
 
-    <!-- ═══ FOOTER ═══ -->
+    <!-- ═══ PART 02 end marker removed — footer follows ═══ -->
     <footer class="footer-bar">
       <span>706 Multi-node Hackathon · 2026 Summer · 人与附近</span>
       <div class="footer-red"></div>
     </footer>
 
   </div>
+  <script>
+    document.querySelectorAll('.collage-photo img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        var figure = img.closest('.collage-photo');
+        if (figure) figure.remove();
+      });
+    });
+
+    (function () {
+      var player = document.getElementById('audioPlayer');
+      var audio = document.getElementById('bgAudio');
+      var toggle = document.getElementById('audioToggle');
+      var status = document.getElementById('audioStatus');
+      var iconPlay = toggle.querySelector('.icon-play');
+      var iconPause = toggle.querySelector('.icon-pause');
+
+      function setPlaying(playing) {
+        player.classList.toggle('is-playing', playing);
+        toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        toggle.setAttribute('aria-label', playing ? '暂停音乐' : '播放音乐');
+        status.textContent = playing ? 'PLAY' : 'PAUSE';
+        iconPlay.hidden = playing;
+        iconPause.hidden = !playing;
+      }
+
+      toggle.addEventListener('click', function () {
+        if (audio.paused) {
+          audio.play().then(function () { setPlaying(true); }).catch(function () { setPlaying(false); });
+        } else {
+          audio.pause();
+          setPlaying(false);
+        }
+      });
+
+      audio.addEventListener('ended', function () { setPlaying(false); });
+      audio.addEventListener('pause', function () {
+        if (audio.currentTime > 0 && !audio.ended) setPlaying(false);
+      });
+    })();
+  </script>
 </body>
 </html>
