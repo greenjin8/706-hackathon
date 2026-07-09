@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>706 Multi-node Hackathon 品牌策划兼核心策划案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #F2EFE9;
+      --red: #B91C1C;
+      --ink: #111111;
+      --axis: 45%;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle, rgba(17, 17, 17, 0.045) 0.6px, transparent 0.6px);
+      background-size: 5px 5px;
+      color: var(--ink);
+      font-family: Georgia, "Songti SC", "SimSun", "Noto Serif SC", serif;
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── Vertical red axis at 45% ── */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: var(--axis);
+      width: 4px;
+      height: 100vh;
+      background: var(--red);
+      z-index: 100;
+      pointer-events: none;
+      box-shadow: 2px 0 0 rgba(185, 28, 28, 0.15);
+    }
+
+    .page {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ── Masthead ── */
+    .masthead {
+      position: relative;
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 6px solid var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      bottom: -14px;
+      left: 0;
+      width: 38%;
+      height: 6px;
+      background: var(--red);
+    }
+
+    .masthead-tag {
+      font-family: "Oswald", Impact, "Arial Narrow Bold", sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .masthead h1 {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      max-width: 85%;
+    }
+
+    .masthead-sub {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      font-style: italic;
+      max-width: 55%;
+      text-align: justify;
+    }
+
+    /* ── Part divider ── */
+    .part-banner {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: 4rem 0 2.5rem;
+      position: relative;
+    }
+
+    .part-banner .part-num {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: clamp(5rem, 14vw, 10rem);
+      font-weight: 700;
+      line-height: 0.82;
+      letter-spacing: -0.04em;
+      color: var(--red);
+      transform: scaleX(0.88);
+      transform-origin: left center;
+      margin-left: -0.05em;
+    }
+
+    .part-banner .part-title {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: -0.3em;
+      padding-left: 0.15em;
+      border-left: 8px solid var(--ink);
+    }
+
+    /* ── Section blocks (asymmetric) ── */
+    .section {
+      position: relative;
+      margin-bottom: 3.5rem;
+      display: grid;
+      grid-template-columns: 38% 1fr;
+      gap: 1.5rem 2rem;
+      align-items: start;
+    }
+
+    .section.reverse {
+      grid-template-columns: 1fr 38%;
+    }
+
+    .section.reverse .section-num-col { order: 2; text-align: right; }
+    .section.reverse .section-body { order: 1; }
+
+    .section-num-col {
+      position: sticky;
+      top: 2rem;
+    }
+
+    .section-num {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      color: var(--red);
+      transform: scaleX(0.85);
+      transform-origin: left top;
+      opacity: 0.92;
+    }
+
+    .section.reverse .section-num {
+      transform-origin: right top;
+    }
+
+    .section-label {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      color: var(--ink);
+      opacity: 0.6;
+    }
+
+    .section-body h2 {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--red);
+      display: inline-block;
+    }
+
+    .section-body h3 {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin: 1.8rem 0 0.8rem;
+      color: var(--red);
+    }
+
+    .section-body p {
+      text-align: justify;
+      margin-bottom: 1rem;
+      hyphens: auto;
+    }
+
+    .section-body ul {
+      list-style: none;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .section-body ul li {
+      text-align: justify;
+      margin-bottom: 0.85rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .section-body ul li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 0.55em;
+      top: 0.35em;
+    }
+
+    .section-body ol {
+      margin: 0.5rem 0 1rem 1.2rem;
+    }
+
+    .section-body ol li {
+      text-align: justify;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-body strong {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── Constructivist diagonal accent ── */
+    .diag-stripe {
+      position: absolute;
+      width: 120px;
+      height: 8px;
+      background: var(--red);
+      transform: rotate(-12deg);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* ── Fieldwork photo ── */
+    .photo-block {
+      position: relative;
+      margin: 4rem 0;
+      padding: 1.5rem;
+      border: 5px solid var(--ink);
+      background: var(--ink);
+      transform: translateX(-2%);
+      max-width: 72%;
+    }
+
+    .photo-block::before {
+      content: "FIELDWORK / 田野";
+      position: absolute;
+      top: -1.1rem;
+      left: 1.5rem;
+      background: var(--paper);
+      padding: 0 0.6rem;
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+
+    .photo-block::after {
+      content: "";
+      position: absolute;
+      bottom: -12px;
+      right: -12px;
+      width: 60%;
+      height: 12px;
+      background: var(--red);
+    }
+
+    .photo-block img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: grayscale(100%) contrast(1.45) brightness(0.92);
+      object-fit: cover;
+      max-height: 480px;
+    }
+
+    .photo-caption {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(242, 239, 233, 0.75);
+      text-align: justify;
+    }
+
+    /* ── Street notice: 组委会提示 ── */
+    .notice {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.4rem 1.6rem 1.4rem 1.8rem;
+      border: 4px solid var(--ink);
+      background: var(--paper);
+      box-shadow:
+        6px 6px 0 var(--red),
+        inset 0 0 0 2px var(--red);
+    }
+
+    .notice::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px dashed var(--ink);
+      pointer-events: none;
+    }
+
+    .notice-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .notice-header::before {
+      content: "⚠";
+      font-size: 1.2rem;
+    }
+
+    .notice p {
+      text-align: justify;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Day schedule blocks ── */
+    .day-block {
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .day-label {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      color: var(--red);
+      transform: scaleX(0.82);
+      transform-origin: left center;
+      margin-bottom: 0.3rem;
+    }
+
+    .day-subtitle {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
+      border-left: 5px solid var(--ink);
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .schedule-period {
+      padding: 1rem 0 1rem 1.2rem;
+      border-left: 3px solid var(--red);
+    }
+
+    .schedule-period h4 {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      color: var(--red);
+    }
+
+    .schedule-period ul li {
+      font-size: 0.95rem;
+    }
+
+    .schedule-note {
+      font-size: 0.85rem;
+      font-style: italic;
+      opacity: 0.75;
+      margin-top: 0.5rem;
+      text-align: justify;
+    }
+
+    /* ── Theme highlight box ── */
+    .theme-box {
+      margin: 2rem 0;
+      padding: 1.8rem;
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    }
+
+    .theme-box h3 {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .theme-box p,
+    .theme-box li {
+      text-align: justify;
+      color: var(--paper);
+    }
+
+    .theme-box ul { list-style: none; }
+    .theme-box ul li::before { color: var(--red); }
+
+    /* ── Footer stripe ── */
+    .footer-bar {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 6px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bar span {
+      font-family: "Oswald", Impact, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .footer-red {
+      width: 40%;
+      height: 6px;
+      background: var(--red);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      :root { --axis: 8%; }
+
+      .section,
+      .section.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .section-num-col { position: static; }
+      .section.reverse .section-num-col { order: 0; text-align: left; }
+      .section.reverse .section-body { order: 0; }
+      .section.reverse .section-num { transform-origin: left top; }
+
+      .photo-block {
+        max-width: 100%;
+        transform: none;
+      }
+
+      .masthead h1 { max-width: 100%; }
+      .masthead-sub { max-width: 100%; }
+    }
+
+    @media print {
+      body::before { display: none; }
+      .section-num-col { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ═══ MASTHEAD ═══ -->
+    <header class="masthead">
+      <div class="masthead-tag">706 · Multi-node · Hackathon · 2026 Summer</div>
+      <h1>706 Multi-node Hackathon<br>品牌策划兼核心策划案</h1>
+      <p class="masthead-sub">以青年社区为基础、以公共议题为导向、以 AI 为技术工具的多节点式跨界共创品牌。</p>
+      <div class="diag-stripe" style="top: 2rem; right: 5%;"></div>
+    </header>
+
+    <!-- ═══ PART 01 ═══ -->
+    <div class="part-banner">
+      <div class="part-num">01</div>
+      <div class="part-title">第一部分：品牌设计</div>
+    </div>
+
+    <!-- 一、品牌定位 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">01</div>
+        <div class="section-label">Brand Positioning</div>
+      </div>
+      <div class="section-body">
+        <h2>一、 品牌定位（Brand Positioning）</h2>
+        <p>706 Multi-node Hackathon 是一套以青年社区为基础、以公共议题为导向、以 AI 为技术工具的多节点式跨界共创品牌。</p>
+        <p>我们不将 Hackathon 局限于纯粹的软件编程或商业竞速。本项目将十多年来在国内外多个城市共创数十个空间据点的经验进行系统化升级。我们致力于把黑客松重构为一种全球青年可参与的公共生活实验网络。通过技术祛魅，我们将人文思考与科技工具重新放回真实的日常场景之中。</p>
+      </div>
+    </article>
+
+    <!-- 二、品牌宣言 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">02</div>
+        <div class="section-label">Manifesto</div>
+      </div>
+      <div class="section-body">
+        <h2>二、 品牌宣言（Manifesto）</h2>
+        <p>AI 技术工具降低了创作的物理门槛，却没有自动拉近人与人之间的心理距离。</p>
+        <p>我们相信，未来真正重要的创造力并非来自虚拟的代码堆砌。它必然来自对真实生活的细致观察、对真实社区的深切连接、以及打破学科壁垒的深度协作。本项目鼓励创作者将目光重新投向身边的"附近"。我们希望借助 AI 辅助创作能力，共同回应具体的公共议题，重构人与人的附近连接。</p>
+      </div>
+    </article>
+
+    <!-- Fieldwork photo -->
+    <figure class="photo-block">
+      <img src="fieldwork.jpg" alt="田野调研纪实">
+      <figcaption class="photo-caption">真实调研（Real Fieldwork）—— 拒绝闭门造车的空中楼阁，关注身边的附近生活、城市公共性与在地价值。</figcaption>
+    </figure>
+
+    <!-- 三、品牌愿景 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">03</div>
+        <div class="section-label">Brand Vision</div>
+      </div>
+      <div class="section-body">
+        <h2>三、 品牌愿景（Brand Vision）</h2>
+        <p>我们希望打造中国最具代表性的 Multi-node Hackathon 品牌，构建一个长效的全球青年共创网络。</p>
+        <p>本项目将持续连接全球 38 个城市节点的青年社区、高校院系、前沿企业与公共文化机构。我们不追求短期的话题爆款，而是专注于长期主义的价值沉淀。通过持续优化多节点共创网络，我们将不断孵化出兼具人文关怀、艺术表达与科技可行性的社会价值成果。</p>
+      </div>
+    </article>
+
+    <!-- 四、品牌方法论 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">04</div>
+        <div class="section-label">Multi-node Methodology</div>
+      </div>
+      <div class="section-body">
+        <h2>四、 品牌方法论：多节点网络（Multi-node Methodology）</h2>
+        <p>706 拒绝单一维度的竞赛模式。本届 Hackathon 依托于以下五大核心节点的协同联动，形成一个去中心化的有机体：</p>
+        <ul>
+          <li><strong>空间节点（Space Nodes）</strong>：依托 706 现有的社区据点、高校校园以及城市微型公共空间开展实践。空间不仅是创作的物理场所，更是选手 2 天沉浸式生活的共同体。</li>
+          <li><strong>人群节点（People Nodes）</strong>：打破传统技术比赛的局限。本项目定向集结人文研究者、科技开发者、艺术创作者以及社区策划人，强制推行跨学科混合组队模式。</li>
+          <li><strong>资源节点（Resource Nodes）</strong>：积极链接前沿算力平台、高校科研院系、专业媒体与长期孵化机构。提供底层的技术工具支撑与专业导师支持，保障创作成果顺利产出。</li>
+          <li><strong>成果节点（Output Nodes）</strong>：倡导多元化的成果输出。最终产出不限于数字产品原型，还广泛覆盖城市调研白皮书、数字叙事作品、公共艺术装置以及社区改良方案。</li>
+          <li><strong>城市节点（City Nodes）</strong>：基于 706 过去积累的 3,800+ 场社区活动经验，推动跨城市的联动共创。各个城市节点互为镜像、共享议题，最终形成全球尺度的青年实验网络。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 五、品牌差异化 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">05</div>
+        <div class="section-label">Brand Differentiation</div>
+      </div>
+      <div class="section-body">
+        <h2>五、 品牌差异化（Brand Differentiation）</h2>
+        <p>区别于传统 Hackathon 聚焦于单一编程、商业路演或资本对齐的刻板赛制，706 具备四大核心差异点：</p>
+        <ul>
+          <li><strong>真实调研（Real Fieldwork）</strong>：拒绝闭门造车的空中楼阁。要求创作者必须关注身边的"附近生活、城市公共性与在地价值"，通过轻量化的数据采集与真实体验展开调研。</li>
+          <li><strong>跨学科协作（Transdisciplinary）</strong>：不设置单一的技术或艺术壁垒。人文、科技、艺术三类人群在团队中处于完全平等的对话语境，用不同的视角解构同一个社会议题。</li>
+          <li><strong>游园展示与长线孵化（Exhibition &amp; Incubation）</strong>：打破讲台式的传统评审机制，采用空间布展、流动巡场的游园会赛制。优秀项目将长期对接 706 全球空间网络，进行持续的落地孵化与社会价值转化。</li>
+          <li><strong>共同生活（Co-living）</strong>：强调沉浸式共同生活。创作者在共同构筑的日常社区里生活、交流与摩擦，从社群连接中直接推演共创灵感。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 六、年度主题 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">06</div>
+        <div class="section-label">Annual Theme 2026</div>
+      </div>
+      <div class="section-body">
+        <h2>六、 2026 Summer 年度主题：人与附近（Annual Theme）</h2>
+        <ol>
+          <li><strong>主题阐述与核心目标</strong>：本届 2026 Summer Hackathon 将以"人与附近"为年度核心主题。引导创作者将目光从宏大的虚拟网络，重新收拢、聚焦于日常生活的具体微观尺度。赛道围绕"附近生活、城市公共性、在地价值"展开，旨在打破现代都市人与人之间的冷漠孤岛状态，重新唤醒青年群体对身边公共连接的探索与重构欲望。</li>
+          <li><strong>核心创作方向与成果形态</strong>：本项目拒绝单一的技术或商业评价指标，倡导利用 AI 辅助创作能力产出五大形态的多元化实践成果：</li>
+        </ol>
+        <div class="theme-box">
+          <h3>五大成果形态</h3>
+          <ul>
+            <li><strong>在地调研报告</strong>：通过轻量化数据采集与城市田野观察，输出揭示附近公共议题的数字白皮书。</li>
+            <li><strong>公共艺术装置</strong>：结合空间形态与在地材料，共创出能够引发社区居民高频互动的装置作品。</li>
+            <li><strong>数字叙事作品</strong>：借助 AI 的多模态表达，产出记录公共连接或空间变迁的影像与交互叙事文本。</li>
+            <li><strong>城市公共方案</strong>：针对社区微小公共微循环遇到的现实痛点，输出具备落地可行性的社区改良方案。</li>
+            <li><strong>AI 辅助产品原型</strong>：开发出旨在打破人际壁垒、激活邻里互助、促进真实空间连接的轻量化 AI 产品 Demo。</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ═══ PART 02 ═══ -->
+    <div class="part-banner">
+      <div class="part-num">02</div>
+      <div class="part-title">第二部分：2026 Summer 落地执行方案</div>
+    </div>
+
+    <!-- 一、主题与目标 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">01</div>
+        <div class="section-label">Theme &amp; Goals</div>
+      </div>
+      <div class="section-body">
+        <h2>一、 2026 Summer：人与附近（主题与目标）</h2>
+        <ul>
+          <li><strong>主题</strong>：人与附近。</li>
+          <li><strong>核心目标</strong>：围绕附近生活、城市公共性、在地价值，借助 AI 产出调研、装置、叙事作品、公共方案与 AI 产品。</li>
+          <li><strong>选题方向</strong>：通过前期投票确认 3 个最终主题，备选八大微观方向包括：附近·身体（空间障碍/疗愈）、附近·感知（感官细节）、附近·擦肩（跨越陌生人间距）、附近·劳动（技术贴近骑手快递员）、附近·故事（空间口述史/记忆）、附近·物件（旧物流动关系）、附近·自然（生态感知）、附近·时间（记录街区四季与节律）。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 二、活动结构 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">02</div>
+        <div class="section-label">Event Architecture</div>
+      </div>
+      <div class="section-body">
+        <h2>二、 活动结构（Event Architecture）</h2>
+
+        <div class="day-block">
+          <div class="day-label">DAY 1</div>
+          <div class="day-subtitle">入住、破冰、组队与开发</div>
+          <div class="schedule-grid">
+            <div class="schedule-period">
+              <h4>上午</h4>
+              <ul>
+                <li>9:00 - 9:30 破冰序曲：真人发布会</li>
+                <li>9:30 - 9:40 启幕：关于"附近"的共同引言</li>
+                <li>9:40 - 10:00 链接时刻：破冰互动与自由组队</li>
+                <li>10:00 - 10:30 智识流变（一）：秦兰珺老师（中国艺术研究院）（当代城市数字地图+《我在北京送快递》）</li>
+                <li>10:30 - 11:00 智识流变（二）：散步APP开发者分享</li>
+                <li>11:00 - 11:10 游玩指南：游戏化规则与现场机制解</li>
+                <li>11:10 - 12:00 技术祛魅：AI 工具链实训</li>
+                <li>12:00 - 13:00 午餐</li>
+              </ul>
+            </div>
+            <div class="schedule-period">
+              <h4>下午 &amp; 晚上</h4>
+              <ul>
+                <li>13:00 - 17:00 极速开发</li>
+                <li>17:00 - 18:30 晚餐</li>
+                <li>18:30 - 19:00 重返身体：呼吸、感知与推拿按摩工作</li>
+                <li>19:00 - 22:30 极速开发</li>
+              </ul>
+              <p class="schedule-note">(注：23:00闭馆，不提供夜间住宿)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-label">DAY 2</div>
+          <div class="day-subtitle">最终冲刺、游园展示、评审与颁奖</div>
+          <div class="schedule-grid">
+            <div class="schedule-period">
+              <h4>上午</h4>
+              <ul>
+                <li>9:00 - 11:00 极速开发</li>
+                <li>11:00 - 11:30 导游时间：市集动线与信物投票指南</li>
+                <li>11:30 - 13:00 午餐</li>
+              </ul>
+            </div>
+            <div class="schedule-period">
+              <h4>下午</h4>
+              <ul>
+                <li>13:00 - 14:00 摆摊设</li>
+                <li>14:00 - 15:00 附近游园会：创意市集与信物交换</li>
+                <li>15:00 - 15:30 对话广场：创作者登台叙事与公开回应</li>
+                <li>15:30 - 15:40 评委巡场：Expo 展览评审与现场照面</li>
+                <li>15:40 - 17:00 圆桌论道：关于公共性与 AI 技术工具的余谈</li>
+                <li>17:00 - 17:30 共筑生态：伙伴之声与长期连接（奇绩创坛享）</li>
+                <li>17:30 - 18:00 致谢未来：颁奖与闭幕致辞</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <div class="notice-header">组委会提示</div>
+          <p>关于破冰阶段卡片任务分发、按摩工作坊技术支持、以及路演麦克风调度等现场强互动细节，请全文推演并参见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 三、组织架构 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">03</div>
+        <div class="section-label">Organizational Structure</div>
+      </div>
+      <div class="section-body">
+        <h2>三、 组织架构（Organizational Structure）</h2>
+        <h3>四大模块（Four Pillars）</h3>
+        <ul>
+          <li><strong>项目管理（Project Management）</strong>：负责整体时间线推进与各模块统筹。</li>
+          <li><strong>外联（External Relations）</strong>：负责赞助商对接、技术算力资源链接、嘉宾邀约。</li>
+          <li><strong>后勤（Logistics &amp; Infrastructure）</strong>：负责场地租用、技术物料保障、餐饮交通统筹。</li>
+          <li><strong>宣传（Communications &amp; Media）</strong>：负责视觉系统设计、媒体矩阵传播与共创记录。</li>
+        </ul>
+        <h3>专项对接（Dedicated Liaison Desks）</h3>
+        <ul>
+          <li><strong>核心模块</strong>：特设嘉宾、选手、志愿者三大专项对接组。在"附近游园会"等高流动性环节，专项组负责现场人流动线引导、突发技术保障等支持。</li>
+        </ul>
+        <div class="notice">
+          <div class="notice-header">组委会提示</div>
+          <p>关于各大模块及志愿者的具体点位排班、现场物料分发（如现场打印机的油墨更换、NFC芯片的贴片协助等）动作指引，请参见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 四、时间线管理 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">04</div>
+        <div class="section-label">Project Timeline</div>
+      </div>
+      <div class="section-body">
+        <h2>四、 时间线管理（Project Timeline）</h2>
+        <ul>
+          <li><strong>筹备期</strong>：落实资金赞助、物理场地及底层大模型算力资源；完成三场主题分享嘉宾及游园评委的邀约与建档。</li>
+          <li><strong>预热期</strong>：发布八大微观主题方向并引导公众进行前期调研投票（甄选出3个高频痛点）；开启线上招募与跨学科背景严格筛选；赛前 1 周建立社群并发布组队指南，引导选手在线上提前建立连接。</li>
+          <li><strong>执行期</strong>：7/25 - 7/26 48小时落地共创。Day 1 依托特定机制处理未组队选手的破冰与融合；Day 2 14:30 前完成通用交付物提交，各团队占领格子空间并完成布展陈列。</li>
+          <li><strong>收尾期</strong>：项目全面复盘总结；将本届优秀产出归档并沉淀至 706 长期空间网络进行后续的孵化与落地。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 五、导师与评委体系 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">05</div>
+        <div class="section-label">Mentor &amp; Jury</div>
+      </div>
+      <div class="section-body">
+        <h2>五、 导师与评委体系（Mentor &amp; Jury System）</h2>
+        <ul>
+          <li><strong>智识输出与圆桌机制</strong>：Day 1 上午密集输出两场具备人文关怀与科技底座的主题演讲；Day 2 下午开展评委、嘉宾与选手共同参与的圆桌深度对话。</li>
+          <li><strong>展览评审制（Expo Evaluation）</strong>：评审打破传统讲台路演局限。评委团在 Day 2 15:30 评审时刻以低姿态进入展区，在各个团队亲手布展的摊位间自由走动、体验作品原型，并进行 3-5 分钟的现场面对面问答提问。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 六、创作者与选手体系 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">06</div>
+        <div class="section-label">Creator Cohort</div>
+      </div>
+      <div class="section-body">
+        <h2>六、 创作者与选手体系（Creator Cohort System）</h2>
+        <ul>
+          <li><strong>规模与跨学科筛选</strong>：严格控制在 50 人精英规模，推行跨学科混合筛选（强烈鼓励社会学/人类学、艺术/设计、工程开发/AI 等背景混合组队）。团队人数上限 5 人，同时允许单人作为独立游牧创作者参赛。</li>
+          <li><strong>交付要求与基本守则</strong>：强调 48 小时现场原创，严禁使用任何现成完整项目参赛。各组需在 Day 2 14:30 前统一提交基础通用交付物（项目名称+一句话简介+主要主题方向+作品形式描述）。鼓励（但不强制）作品在赛后进行开源，并提交 AI 工具链使用声明。</li>
+        </ul>
+        <div class="notice">
+          <div class="notice-header">组委会提示</div>
+          <p>关于 Day 1 现场"跳蚤市场墙"处理未成队选手机制、以及 Day 2 "空格子（诚实记录失败碎片）"的现场布展物理规范，在策划案中仅作为人文玩法概念保留，具体实操与表单打印规范详见独立分册《2026 Summer 现场执行与游戏实操手册》。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 七、赞助与共创生态 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">07</div>
+        <div class="section-label">Sponsorship</div>
+      </div>
+      <div class="section-body">
+        <h2>七、 赞助与共创生态（Sponsorship &amp; Co-creation Ecosystem）</h2>
+        <ul>
+          <li><strong>多维合作类型</strong>：面向社会各界开放现金赞助、算力平台支持、现场物料提供、公共媒体矩阵等多流向的深度合作。</li>
+          <li><strong>权益矩阵</strong>：为合作伙伴提供线上线下全渠道品牌露出、特邀智识分享席位、创意市集专属游园展位、以及优秀青年项目的优先长线对接等核心权益。特别设立由赞助商深度冠名的专属创新奖项（如"观猹 Token 特别奖"、"奇绩算力奖"）。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 八、风险控制 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">08</div>
+        <div class="section-label">Risk Mitigation</div>
+      </div>
+      <div class="section-body">
+        <h2>八、 风险控制与应急管理（Risk Mitigation &amp; Contingency Framework）</h2>
+        <ul>
+          <li><strong>六类核心风险控制</strong>：覆盖场地、算力、人员、预算、流程、合规六大维度。</li>
+          <li><strong>前置检查与应急预案</strong>：</li>
+        </ul>
+        <ul>
+          <li><em>技术与算力风险</em>：针对现场 API 崩溃、网络无法调用等技术黑天鹅事件，组委会前置提供物理交互物料备用套件（如 Arduino/ESP32 开发板、基础传感器等），确保成果表现不因网络中断而流产。</li>
+          <li><em>人员与流程风险</em>：针对赛前迟迟未成功组队的孤单选手，由项目管理模块进行主动私聊与社群匹配，防范人员流失风险。</li>
+          <li><em>合规与数据规范</em>：严格审查参赛作品，确保凡涉及真实社区用户数据采集的调研作品均遵守数据隐私合规规范。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 九、品牌资产沉淀 -->
+    <article class="section">
+      <div class="section-num-col">
+        <div class="section-num">09</div>
+        <div class="section-label">Brand Legacy</div>
+      </div>
+      <div class="section-body">
+        <h2>九、 品牌资产沉淀（Brand Legacy）</h2>
+        <h3>四大知识库建立</h3>
+        <p>活动结束后，组委会将两日内的共创成果转化长效 brand 资产，建立四大基础库：</p>
+        <ul>
+          <li><strong>作品库</strong>：分类归档软件原型、交互装置、AI 工作流、社区改良方案等多元成果。</li>
+          <li><strong>创作者库</strong>：长期链接本届 50 名优秀的跨学科青年人才。</li>
+          <li><strong>导师库</strong>：沉淀兼具人文厚度与技术视野的专业专家网络。</li>
+          <li><strong>合作伙伴库</strong>：记录并长线连接关注公共性价值的企业与机构。</li>
+        </ul>
+        <p><strong>长线价值孵化</strong>：结合特色玩法中"空格子"所沉淀的诚实叙事记录以及"信物交换"互评结果，筛选出兼具真实人文关怀、艺术张力与科技落地可行性的优秀项目，直接注入 706 长期网络进行持续的空间落地扶持与孵化。</p>
+      </div>
+    </article>
+
+    <!-- 十、长期发展路线图 -->
+    <article class="section reverse">
+      <div class="section-num-col">
+        <div class="section-num">10</div>
+        <div class="section-label">Brand Roadmap</div>
+      </div>
+      <div class="section-body">
+        <h2>十、 长期发展路线图（Brand Roadmap）</h2>
+        <ul>
+          <li><strong>在地实践首发</strong>：2026 年夏季以北京为首发站，落地《人与附近》年度主题实践。</li>
+          <li><strong>去中心化网络蔓延</strong>：后续将该套人文 Hackathon 模式快速复制并蔓延至其他核心城市节点（共享社会议题、互为田野镜像），逐步形成去中心化的 <strong>706 Multi-node Hackathon Network</strong>，让全球青年可以随时随地展开游牧共创，共同重构具体的生活世界。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer-bar">
+      <span>706 Multi-node Hackathon · 2026 Summer · 人与附近</span>
+      <div class="footer-red"></div>
+    </footer>
+
+  </div>
+</body>
+</html>
